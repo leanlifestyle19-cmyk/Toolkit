@@ -84,15 +84,6 @@ a{color:inherit;text-decoration:none}
   display:flex;align-items:center;gap:6px;
 }
 .hero-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.btn-buy{
-  background:#fff;color:var(--accent);
-  border-radius:var(--radius-sm);padding:14px 24px;
-  font-size:15px;font-weight:700;
-  display:inline-flex;align-items:center;gap:8px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.2);
-  transition:transform .18s,box-shadow .18s;
-}
-.btn-buy:active{transform:scale(0.97);box-shadow:0 2px 8px rgba(0,0,0,0.2)}
 .btn-outline{
   background:rgba(255,255,255,0.12);color:#fff;
   border:1.5px solid rgba(255,255,255,0.35);
@@ -102,7 +93,6 @@ a{color:inherit;text-decoration:none}
   transition:background .18s;
 }
 .btn-outline:active{background:rgba(255,255,255,0.2)}
-.hero-price-note{font-size:12px;opacity:0.7;margin-top:8px}
 
 /* wave */
 .wave{display:block;width:100%;margin-bottom:-2px;position:relative;z-index:1}
@@ -155,33 +145,6 @@ a{color:inherit;text-decoration:none}
 .app-feature-dot{width:6px;height:6px;border-radius:50%;
   flex-shrink:0;margin-top:7px}
 
-/* ── BUNDLE SECTION ──────────────────────────────────── */
-.bundle-section{
-  margin:8px 16px 16px;
-  background:linear-gradient(135deg,#1665C0,#0698A0);
-  border-radius:var(--radius);padding:24px 20px;color:#fff;
-  box-shadow:var(--shadow-lg);
-}
-.bundle-title{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:20px;font-weight:700;margin-bottom:6px}
-.bundle-sub{font-size:13px;opacity:0.85;margin-bottom:16px;line-height:1.6}
-.bundle-items{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-.bundle-chip{background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.25);border-radius:20px;
-  padding:4px 12px;font-size:13px;font-weight:600}
-.bundle-price{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:28px;font-weight:800;margin-bottom:4px}
-.bundle-price span{font-size:14px;font-weight:500;opacity:0.75}
-.bundle-buy-btn{
-  width:100%;background:#fff;color:#1665C0;
-  border-radius:var(--radius-sm);padding:15px;
-  font-size:16px;font-weight:700;display:flex;
-  align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.15);
-  transition:transform .18s;
-}
-.bundle-buy-btn:active{transform:scale(0.98)}
-
 /* ── FEATURES STRIP ──────────────────────────────────── */
 .features-strip{
   margin:0 16px 16px;
@@ -227,7 +190,7 @@ a{color:inherit;text-decoration:none}
     </div>
 
     <div class="hero-content">
-      <div class="hero-badge">✈️ 3-App Bundle</div>
+      <div class="hero-badge">✈️ 3 Apps · Free to Use</div>
       <div class="hero-title">Everything for<br><span>the perfect trip.</span></div>
       <div class="hero-sub">Plan your itinerary, pack smarter, and split bills with your crew — three apps designed to work beautifully together.</div>
       <div class="hero-apps">
@@ -236,14 +199,10 @@ a{color:inherit;text-decoration:none}
         <div class="hero-app-pill">💸 Divvy</div>
       </div>
       <div class="hero-cta-row">
-        <button class="btn-buy" onclick="openBuy()">
-          🛒 Get the Bundle
-        </button>
         <button class="btn-outline" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          See Apps ↓
+          Explore the Apps ↓
         </button>
       </div>
-      <div class="hero-price-note">One-time purchase per person · No subscription · Works offline</div>
     </div>
 
     <svg class="wave" viewBox="0 0 1440 56" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -373,22 +332,7 @@ a{color:inherit;text-decoration:none}
     <div class="feature-row"><span class="feature-row-icon">🔒</span><span>All data stays on your phone — no accounts, no sign-up required</span></div>
     <div class="feature-row"><span class="feature-row-icon">💾</span><span>Share your trips and lists with travel companions in one tap</span></div>
     <div class="feature-row"><span class="feature-row-icon">🌙</span><span>Dark mode across all three apps</span></div>
-    <div class="feature-row"><span class="feature-row-icon">🚫</span><span>No subscriptions, no ads, no tracking — one-time purchase</span></div>
-  </div>
-
-  <!-- ── BUNDLE CTA ─────────────────────────────────────── -->
-  <div class="bundle-section" id="buy">
-    <div class="bundle-title">Get All Three Apps</div>
-    <div class="bundle-sub">One price per person. Use on your phone, tablet, or any browser — yours to keep forever.</div>
-    <div class="bundle-items">
-      <div class="bundle-chip">✈️ Wayfarer</div>
-      <div class="bundle-chip">🎒 PackList</div>
-      <div class="bundle-chip">💸 Divvy</div>
-    </div>
-    <div class="bundle-price" id="bundle-price-display">$9 <span>one-time</span></div>
-    <button class="bundle-buy-btn" onclick="openBuy()">
-      🛒 Buy Travel Toolkit
-    </button>
+    <div class="feature-row"><span class="feature-row-icon">🚫</span><span>No subscriptions, no ads, no tracking — ever</span></div>
   </div>
 
   <!-- ── KO-FI ──────────────────────────────────────────── -->
@@ -418,44 +362,10 @@ a{color:inherit;text-decoration:none}
   <!-- ── FOOTER ─────────────────────────────────────────── -->
   <div class="footer">
     <div class="footer-text">
-      Already purchased?
-      <button onclick="enterLicenseKey()" style="color:var(--accent);font-weight:600;text-decoration:underline;background:none;border:none;cursor:pointer">Enter your license key</button>
-      in any app under Settings → License.
-      <br><br>
       © 2025 Travel Toolkit · Built with ❤️ for travellers
     </div>
   </div>
 
-</div>
-
-<!-- LICENSE HINT MODAL -->
-<div id="license-modal" style="
-  display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(6,24,38,0.6);backdrop-filter:blur(4px);
-  align-items:flex-end;justify-content:center;">
-  <div style="
-    background:var(--bg-card);border-radius:20px 20px 0 0;
-    width:100%;max-width:520px;
-    padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));
-    box-shadow:0 8px 36px rgba(0,0,0,0.2);">
-    <div style="width:36px;height:4px;border-radius:2px;
-      background:var(--border);margin:0 auto 16px"></div>
-    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;
-      font-weight:700;margin-bottom:8px">Enter License Key</div>
-    <p style="font-size:14px;color:var(--text-3);margin-bottom:16px;line-height:1.6">
-      After purchasing, enter your license key in each app under <strong>Settings → License</strong>. This unlocks the full version and removes the buy banner.
-    </p>
-    <div style="background:var(--bg-subtle);border-radius:10px;padding:14px;
-      font-size:13px;color:var(--text-2);margin-bottom:16px;line-height:1.8">
-      1. Open any of the three apps<br>
-      2. Tap <strong>Settings</strong> (bottom right)<br>
-      3. Tap <strong>License → Enter key → Activate</strong>
-    </div>
-    <button onclick="closeLicenseModal()" style="
-      width:100%;background:var(--accent);color:#fff;
-      border-radius:10px;padding:14px;font-size:15px;font-weight:700;
-      border:none;cursor:pointer">Got it</button>
-  </div>
 </div>
 
 <script>
@@ -477,10 +387,7 @@ const APPS = {
   },
 };
 
-const GUMROAD_URL = 'https://gumroad.com/l/CHANGE_THIS';
-const BUNDLE_PRICE = '$9';
-
-/* ── THEME ──────────────────────────────────────────── */
+const APPS = {
 function initTheme() {
   const saved = localStorage.getItem('toolkit-theme');
   const dark  = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
@@ -504,19 +411,6 @@ function openApp(key) {
   if (app) window.open(app.url, '_blank');
 }
 
-function openBuy() {
-  window.open(GUMROAD_URL, '_blank');
-}
-
-/* ── LICENSE MODAL ──────────────────────────────────── */
-function enterLicenseKey() {
-  document.getElementById('license-modal').style.display = 'flex';
-}
-
-function closeLicenseModal() {
-  document.getElementById('license-modal').style.display = 'none';
-}
-
 /* ── SERVICE WORKER ─────────────────────────────────── */
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
@@ -524,8 +418,6 @@ if ('serviceWorker' in navigator) {
 
 /* ── INIT ───────────────────────────────────────────── */
 initTheme();
-document.getElementById('bundle-price-display').innerHTML =
-  `${BUNDLE_PRICE} <span>one-time</span>`;
 </script>
 </body>
 </html>
