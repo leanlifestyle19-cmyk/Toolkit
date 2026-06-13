@@ -3,26 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1665C0">
+<meta name="theme-color" content="#0D47A1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Travel Toolkit">
-<meta name="description" content="Three apps for the perfect trip — itinerary, packing, and bills.">
+<meta name="description" content="Three apps for the perfect trip — plan, pack, and split.">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <title>Travel Toolkit</title>
 <style>
-/* ── RESET ───────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{height:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{min-height:100%;font-family:'Inter',sans-serif;font-size:15px;line-height:1.5;
   background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;
-  transition:background .25s,color .25s;overscroll-behavior-y:none}
+  transition:background .25s,color .25s}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
 
-/* ── TOKENS ──────────────────────────────────────────── */
 :root{
   --bg:#F0F9FF;--bg-card:#fff;--bg-subtle:#EBF5FF;
   --text:#061826;--text-2:#2D5F7C;--text-3:#5B8FA8;--text-muted:#8BAEC0;
@@ -38,386 +36,582 @@ a{color:inherit;text-decoration:none}
   --border:rgba(77,184,200,0.12);--accent:#4DB8C8;--teal:#4DB8C8;
   --shadow:0 2px 16px rgba(0,0,0,0.3);--shadow-lg:0 8px 36px rgba(0,0,0,0.5);
 }
-
-/* ── LAYOUT ──────────────────────────────────────────── */
-.page{max-width:520px;margin:0 auto;padding-bottom:calc(32px + var(--safe-bottom))}
-
-/* ── HERO ────────────────────────────────────────────── */
-.hero{
-  background:linear-gradient(160deg,#0D47A1 0%,#1665C0 40%,#0698A0 100%);
-  color:#fff;padding:calc(32px + var(--safe-top)) 24px 0;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 80% 0%,rgba(255,255,255,0.08) 0%,transparent 60%);
-}
-.hero-top{display:flex;align-items:center;justify-content:space-between;
-  position:relative;z-index:1;margin-bottom:32px}
-.hero-logo{display:flex;align-items:center;gap:10px}
-.hero-logo-icon{width:40px;height:40px;border-radius:12px;
-  background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;font-size:20px}
-.hero-logo-name{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:16px;font-weight:700;opacity:0.95}
-.hero-theme-btn{width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;font-size:16px}
-
-.hero-content{position:relative;z-index:1;padding-bottom:20px}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.25);border-radius:20px;
-  padding:5px 14px;font-size:12px;font-weight:600;
-  letter-spacing:0.05em;text-transform:uppercase;margin-bottom:16px}
-.hero-title{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:36px;font-weight:800;line-height:1.15;
-  margin-bottom:12px;letter-spacing:-0.5px}
-.hero-title span{opacity:0.75}
-.hero-sub{font-size:16px;opacity:0.85;line-height:1.6;
-  margin-bottom:28px;max-width:340px}
-.hero-apps{display:flex;gap:8px;margin-bottom:24px}
-.hero-app-pill{
-  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.2);border-radius:20px;
-  padding:6px 14px;font-size:13px;font-weight:600;
-  display:flex;align-items:center;gap:6px;
-}
-.hero-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.btn-outline{
-  background:rgba(255,255,255,0.12);color:#fff;
-  border:1.5px solid rgba(255,255,255,0.35);
-  border-radius:var(--radius-sm);padding:14px 20px;
-  font-size:15px;font-weight:600;
-  display:inline-flex;align-items:center;gap:8px;
-  transition:background .18s;
-}
-.btn-outline:active{background:rgba(255,255,255,0.2)}
-
-/* wave */
-.wave{display:block;width:100%;margin-bottom:-2px;position:relative;z-index:1}
-
-/* ── APP CARDS ───────────────────────────────────────── */
-.apps-section{padding:24px 16px 8px}
-.apps-section-title{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:13px;font-weight:700;color:var(--text-muted);
-  text-transform:uppercase;letter-spacing:0.07em;margin-bottom:14px}
-
-.app-card{
-  border-radius:var(--radius);overflow:hidden;
-  box-shadow:var(--shadow-lg);margin-bottom:14px;
-  cursor:pointer;transition:transform .2s;
-}
-.app-card:active{transform:scale(0.985)}
-.app-card-hero{
-  padding:22px 20px 16px;color:#fff;min-height:140px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  position:relative;overflow:hidden;
-}
-.app-card-hero::after{
-  content:'';position:absolute;right:-20px;top:-20px;
-  width:120px;height:120px;border-radius:50%;
-  background:rgba(255,255,255,0.07);
-}
-.app-card-top{display:flex;align-items:center;gap:12px}
-.app-icon{width:48px;height:48px;border-radius:14px;
-  background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;font-size:24px;
-  flex-shrink:0}
-.app-name{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:20px;font-weight:700}
-.app-tagline{font-size:13px;opacity:0.8;margin-top:2px}
-.app-open-btn{
-  align-self:flex-start;
-  background:#fff;border-radius:20px;
-  padding:8px 20px;font-size:14px;font-weight:700;
-  display:inline-flex;align-items:center;gap:6px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.15);
-  transition:transform .18s;
-}
-.app-open-btn:active{transform:scale(0.95)}
-.app-card-body{
-  background:var(--bg-card);border-top:1px solid var(--border);
-  padding:16px 20px;
-}
-.app-features{display:flex;flex-direction:column;gap:8px}
-.app-feature{display:flex;align-items:flex-start;gap:10px;font-size:14px}
-.app-feature-dot{width:6px;height:6px;border-radius:50%;
-  flex-shrink:0;margin-top:7px}
-
-/* ── FEATURES STRIP ──────────────────────────────────── */
-.features-strip{
-  margin:0 16px 16px;
-  background:var(--bg-card);border-radius:var(--radius);
-  border:1px solid var(--border);padding:20px;
-  box-shadow:var(--shadow);
-}
-.features-strip-title{font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:15px;font-weight:700;color:var(--text-2);margin-bottom:14px}
-.feature-row{display:flex;align-items:center;gap:12px;
-  padding:8px 0;border-bottom:1px solid var(--border);
-  font-size:14px;color:var(--text-2)}
-.feature-row:last-child{border-bottom:none}
-.feature-row-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0}
-
-/* ── FOOTER ──────────────────────────────────────────── */
-.footer{padding:20px 16px 8px;text-align:center}
-.footer-text{font-size:12px;color:var(--text-muted);line-height:1.8}
-
-/* ── RESPONSIVE ──────────────────────────────────────── */
 @media(prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#061826;--bg-card:#0D2340;--bg-subtle:#0D2E4E;
     --text:#E1F5FE;--text-2:#90CAE0;--text-3:#5B8FA8;--text-muted:#3D6E8A;
     --border:rgba(77,184,200,0.12);--accent:#4DB8C8;--teal:#4DB8C8;
-    --shadow:0 2px 16px rgba(0,0,0,0.3);--shadow-lg:0 8px 36px rgba(0,0,0,0.5);
   }
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ── LAYOUT ── */
+.page{max-width:520px;margin:0 auto;padding-bottom:calc(40px + var(--safe-bottom))}
+
+/* ── ONBOARDING ── */
+#onboarding{position:fixed;inset:0;z-index:900;display:flex;
+  flex-direction:column;background:#061826}
+#onboarding.hidden{display:none}
+.ob-slides{flex:1;position:relative;overflow:hidden}
+.ob-slide{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:48px 32px 32px;
+  text-align:center;color:#fff;
+  transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.ob-emoji{font-size:80px;margin-bottom:24px;
+  animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.ob-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;
+  font-weight:800;line-height:1.2;margin-bottom:12px;letter-spacing:-0.3px}
+.ob-sub{font-size:16px;opacity:0.85;line-height:1.65;max-width:300px}
+.ob-app-row{display:flex;gap:10px;margin-top:20px;justify-content:center}
+.ob-app-chip{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600}
+.ob-footer{padding:20px 24px calc(20px + var(--safe-bottom));
+  background:rgba(0,0,0,0.2);display:flex;flex-direction:column;
+  align-items:center;gap:14px}
+.ob-dots{display:flex;gap:8px}
+.ob-dot{width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,0.3);cursor:pointer;transition:all .3s}
+.ob-dot.active{width:24px;border-radius:4px;background:#fff}
+.ob-btns{display:flex;gap:10px;width:100%}
+.ob-btn-primary{flex:1;padding:15px;border-radius:var(--radius-sm);
+  background:#fff;font-size:16px;font-weight:700;cursor:pointer;
+  transition:all .18s;border:none}
+.ob-btn-ghost{padding:15px 18px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,0.12);color:#fff;font-size:14px;
+  font-weight:600;cursor:pointer;border:none;
+  border:1px solid rgba(255,255,255,0.2)}
+.ob-skip{font-size:13px;color:rgba(255,255,255,0.55);
+  background:none;border:none;cursor:pointer;padding:4px}
+
+/* ── MAIN HEADER ── */
+.main-header{
+  background:linear-gradient(160deg,#0D47A1 0%,#1665C0 50%,#0698A0 100%);
+  color:#fff;padding:calc(20px + var(--safe-top)) 20px 0;
+  position:relative;overflow:hidden;
+}
+.main-header::before{content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  top:-100px;right:-100px;pointer-events:none}
+.top-bar{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:28px;position:relative;z-index:1}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:38px;height:38px;border-radius:11px;
+  background:rgba(255,255,255,0.18);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.logo-name{font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:16px;font-weight:700}
+.theme-btn{width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,0.12);display:flex;
+  align-items:center;justify-content:center;font-size:15px}
+
+/* ── HERO ── */
+.hero-content{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+  border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;margin-bottom:14px}
+.hero-title{font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:34px;font-weight:800;line-height:1.15;
+  margin-bottom:10px;letter-spacing:-0.5px}
+.hero-title span{opacity:0.65}
+.hero-sub{font-size:15px;opacity:0.82;line-height:1.65;
+  margin-bottom:24px;max-width:320px}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;
+  background:#fff;color:#1665C0;
+  border-radius:var(--radius-sm);padding:13px 24px;
+  font-size:15px;font-weight:700;margin-bottom:28px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);cursor:pointer;transition:transform .18s}
+.hero-cta:active{transform:scale(0.97)}
+
+/* ── JOURNEY WHEEL ── */
+.journey-container{display:flex;flex-direction:column;align-items:center;
+  padding:8px 20px 24px;gap:16px}
+.journey-wheel{width:280px;height:280px;position:relative;flex-shrink:0}
+.journey-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.journey-center{position:absolute;width:76px;height:76px;
+  top:102px;left:102px;border-radius:50%;
+  background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);
+  border:2px solid rgba(255,255,255,0.35);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;color:#fff;
+  box-shadow:0 0 24px rgba(255,255,255,0.1)}
+.journey-center-icon{font-size:24px;line-height:1}
+.journey-center-label{font-size:8px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.05em;
+  opacity:0.75;margin-top:3px;line-height:1.3}
+.jnode{position:absolute;width:66px;height:66px;border-radius:50%;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
+  border:1.5px solid rgba(255,255,255,0.22);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;cursor:pointer;
+  transition:all .25s cubic-bezier(.4,0,.2,1);color:#fff}
+.jnode:active,.jnode.active{
+  background:rgba(255,255,255,0.28);
+  border-color:rgba(255,255,255,0.7);
+  transform:scale(1.12);
+  box-shadow:0 0 20px rgba(255,255,255,0.2)}
+.jnode[data-pos="top"]   {top:7px;  left:107px}
+.jnode[data-pos="right"] {top:107px;left:207px}
+.jnode[data-pos="bottom"]{top:207px;left:107px}
+.jnode[data-pos="left"]  {top:107px;left:7px}
+.jnode-num{font-size:8px;font-weight:700;opacity:0.6;
+  text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1px}
+.jnode-emoji{font-size:20px;line-height:1}
+.jnode-label{font-size:10px;font-weight:700;margin-top:3px;opacity:0.9}
+.journey-detail{width:100%;max-width:280px;
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.2);border-radius:14px;
+  padding:14px 16px;color:#fff;transition:all .3s}
+.jd-when{font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.07em;opacity:0.6;margin-bottom:5px}
+.jd-title{font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:16px;font-weight:700;margin-bottom:5px}
+.jd-desc{font-size:13px;opacity:0.8;line-height:1.55}
+.jd-app{display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.15);border-radius:12px;
+  padding:4px 11px;font-size:11px;font-weight:700;margin-top:9px}
+
+.wave{display:block;width:100%;position:relative;z-index:1;margin-bottom:-2px}
+
+/* ── APP CARDS ── */
+.section-label{font-size:12px;font-weight:700;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:0.07em;
+  padding:24px 16px 12px}
+.app-card{border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-lg);margin:0 16px 14px;cursor:pointer;
+  transition:transform .2s}
+.app-card:active{transform:scale(0.985)}
+.app-card-hero{padding:22px 20px 16px;color:#fff;min-height:136px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden}
+.app-card-hero::after{content:'';position:absolute;
+  right:-24px;top:-24px;width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,0.06)}
+.app-icon{width:46px;height:46px;border-radius:13px;
+  background:rgba(255,255,255,0.18);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+.app-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:700}
+.app-tagline{font-size:12px;opacity:0.78;margin-top:1px}
+.app-open{align-self:flex-start;background:#fff;border-radius:20px;
+  padding:7px 18px;font-size:13px;font-weight:700;
+  box-shadow:0 2px 8px rgba(0,0,0,0.14);transition:transform .18s}
+.app-open:active{transform:scale(0.95)}
+.app-card-body{background:var(--bg-card);border-top:1px solid var(--border);
+  padding:14px 18px}
+.app-feat{display:flex;align-items:flex-start;gap:9px;
+  font-size:13px;color:var(--text-2);padding:5px 0;
+  border-bottom:1px solid var(--border)}
+.app-feat:last-child{border-bottom:none}
+.app-feat-dot{width:6px;height:6px;border-radius:50%;
+  flex-shrink:0;margin-top:6px}
+
+/* ── WHY SECTION ── */
+.why-section{margin:4px 16px 16px;background:var(--bg-card);
+  border-radius:var(--radius);border:1px solid var(--border);
+  padding:20px;box-shadow:var(--shadow)}
+.why-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;
+  font-weight:700;color:var(--text-2);margin-bottom:14px}
+.why-row{display:flex;align-items:center;gap:12px;
+  padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:14px;color:var(--text-2)}
+.why-row:last-child{border-bottom:none}
+.why-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0}
+
+/* ── KOFI ── */
+.kofi-section{margin:0 16px 16px;background:var(--bg-card);
+  border-radius:var(--radius);border:1px solid var(--border);
+  padding:20px;text-align:center;box-shadow:var(--shadow)}
+.kofi-btn{display:inline-flex;align-items:center;gap:8px;
+  background:#FF5E5B;color:#fff;border-radius:var(--radius-sm);
+  padding:12px 24px;font-size:15px;font-weight:700;
+  box-shadow:0 4px 12px rgba(255,94,91,0.3);
+  transition:transform .18s;margin-top:14px}
+.kofi-btn:active{transform:scale(0.97)}
+
+/* ── FOOTER ── */
+.footer{padding:16px;text-align:center;
+  font-size:12px;color:var(--text-muted);line-height:1.8}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- ── HERO ─────────────────────────────────────────── -->
-  <div class="hero">
-    <div class="hero-top">
-      <div class="hero-logo">
-        <div class="hero-logo-icon">🗺️</div>
-        <span class="hero-logo-name">Travel Toolkit</span>
+<!-- ── ONBOARDING ─────────────────────────────────────── -->
+<div id="onboarding">
+  <div class="ob-slides" id="ob-slides"></div>
+  <div class="ob-footer">
+    <div class="ob-dots" id="ob-dots"></div>
+    <div class="ob-btns">
+      <button class="ob-btn-ghost" id="ob-back" onclick="obPrev()" style="display:none">← Back</button>
+      <button class="ob-btn-primary" id="ob-next" onclick="obNext()"></button>
+    </div>
+    <button class="ob-skip" id="ob-skip" onclick="finishOnboarding()">Skip intro</button>
+  </div>
+</div>
+
+<!-- ── MAIN PAGE ──────────────────────────────────────── -->
+<div class="page" id="main-page" style="display:none">
+
+  <div class="main-header">
+    <div class="top-bar">
+      <div class="logo">
+        <div class="logo-icon">🗺️</div>
+        <span class="logo-name">Travel Toolkit</span>
       </div>
-      <button class="hero-theme-btn" onclick="toggleTheme()" title="Toggle dark mode">🌙</button>
+      <button class="theme-btn" onclick="toggleTheme()">🌙</button>
     </div>
 
     <div class="hero-content">
-      <div class="hero-badge">✈️ 3 Apps · Free to Use</div>
-      <div class="hero-title">Everything for<br><span>the perfect trip.</span></div>
-      <div class="hero-sub">Plan your itinerary, pack smarter, and split bills with your crew — three apps designed to work beautifully together.</div>
-      <div class="hero-apps">
-        <div class="hero-app-pill">✈️ TripBinder</div>
-        <div class="hero-app-pill">🎒 PackList</div>
-        <div class="hero-app-pill">💸 Divvy</div>
+      <div class="hero-badge">✈️ Three apps · One journey</div>
+      <div class="hero-title">From dreaming<br><span>to doing.</span></div>
+      <div class="hero-sub">Everything you need from the moment you decide to travel, to the moment you're back home.</div>
+      <button class="hero-cta" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
+        Explore the Apps ↓
+      </button>
+    </div>
+
+    <!-- Customer Journey Wheel -->
+    <div class="journey-container">
+      <div class="journey-wheel">
+        <svg class="journey-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- Dashed background ring -->
+          <circle cx="140" cy="140" r="100" fill="none"
+            stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <!-- Quarter arcs between nodes -->
+          <path d="M 140,40 A 100,100 0 0,1 240,140" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <path d="M 240,140 A 100,100 0 0,1 140,240" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <path d="M 140,240 A 100,100 0 0,1 40,140"  fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <path d="M 40,140  A 100,100 0 0,1 140,40"  fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <!-- Clockwise arrowheads at midpoints -->
+          <g transform="translate(211,69)  rotate(45)" ><polygon points="-5,-3 5,0 -5,3" fill="rgba(255,255,255,0.55)"/></g>
+          <g transform="translate(211,211) rotate(135)"><polygon points="-5,-3 5,0 -5,3" fill="rgba(255,255,255,0.55)"/></g>
+          <g transform="translate(69,211)  rotate(225)"><polygon points="-5,-3 5,0 -5,3" fill="rgba(255,255,255,0.55)"/></g>
+          <g transform="translate(69,69)   rotate(315)"><polygon points="-5,-3 5,0 -5,3" fill="rgba(255,255,255,0.55)"/></g>
+          <!-- Animated travelling dot -->
+          <circle r="4.5" fill="#fff" opacity="0.8">
+            <animateMotion dur="8s" repeatCount="indefinite"
+              path="M 140,40 A 100,100 0 1,1 139.99,40.01"/>
+          </circle>
+        </svg>
+
+        <!-- Center logo -->
+        <div class="journey-center">
+          <div class="journey-center-icon">🗺️</div>
+          <div class="journey-center-label">Travel<br>Toolkit</div>
+        </div>
+
+        <!-- Nodes -->
+        <div class="jnode active" data-pos="top"    onclick="selectNode(0)">
+          <div class="jnode-num">01</div>
+          <div class="jnode-emoji">✈️</div>
+          <div class="jnode-label">Plan</div>
+        </div>
+        <div class="jnode" data-pos="right"  onclick="selectNode(1)">
+          <div class="jnode-num">02</div>
+          <div class="jnode-emoji">🎒</div>
+          <div class="jnode-label">Pack</div>
+        </div>
+        <div class="jnode" data-pos="bottom" onclick="selectNode(2)">
+          <div class="jnode-num">03</div>
+          <div class="jnode-emoji">🌍</div>
+          <div class="jnode-label">Travel</div>
+        </div>
+        <div class="jnode" data-pos="left"   onclick="selectNode(3)">
+          <div class="jnode-num">04</div>
+          <div class="jnode-emoji">💸</div>
+          <div class="jnode-label">Split</div>
+        </div>
       </div>
-      <div class="hero-cta-row">
-        <button class="btn-outline" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          Explore the Apps ↓
-        </button>
+
+      <!-- Tap-to-expand detail card -->
+      <div class="journey-detail">
+        <div class="jd-when"  id="jd-when"></div>
+        <div class="jd-title" id="jd-title"></div>
+        <div class="jd-desc"  id="jd-desc"></div>
+        <div class="jd-app"   id="jd-app"></div>
       </div>
     </div>
 
     <svg class="wave" viewBox="0 0 1440 56" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,32 C240,56 480,8 720,32 C960,56 1200,8 1440,32 L1440,56 L0,56 Z" fill="rgba(255,255,255,0.1)"/>
+      <path d="M0,32 C240,56 480,8 720,32 C960,56 1200,8 1440,32 L1440,56 L0,56 Z" fill="rgba(255,255,255,0.08)"/>
       <path d="M0,44 C360,20 720,56 1080,32 C1260,20 1380,40 1440,44 L1440,56 L0,56 Z" fill="var(--bg)"/>
     </svg>
   </div>
 
-  <!-- ── APP CARDS ─────────────────────────────────────── -->
-  <div class="apps-section" id="apps">
-    <div class="apps-section-title">The Apps</div>
+  <!-- App Cards -->
+  <div class="section-label" id="apps">The Apps</div>
 
-    <!-- Wayfarer -->
-    <div class="app-card" onclick="openApp('wayfarer')">
-      <div class="app-card-hero" style="background:linear-gradient(135deg,#1665C0,#0698A0)">
-        <div class="app-card-top">
-          <div class="app-icon">✈️</div>
-          <div>
-            <div class="app-name">TripBinder</div>
-            <div class="app-tagline">Trip itinerary binder</div>
-          </div>
-        </div>
-        <button class="app-open-btn" style="color:#1665C0">
-          Open App →
-        </button>
-      </div>
-      <div class="app-card-body">
-        <div class="app-features">
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1665C0"></div>
-            <span>Plan multi-city trips with day-by-day timeline</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1665C0"></div>
-            <span>Attach boarding passes, hotel vouchers, and PDFs to each item</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1665C0"></div>
-            <span>Pre-departure checklist, calendar view, and map pins</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1665C0"></div>
-            <span>Fully offline — access everything without Wi-Fi</span>
-          </div>
+  <div class="app-card" onclick="openApp('wayfarer')">
+    <div class="app-card-hero" style="background:linear-gradient(135deg,#1665C0,#0698A0)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="app-icon">✈️</div>
+        <div>
+          <div class="app-name">TripBinder</div>
+          <div class="app-tagline">Your trip itinerary binder</div>
         </div>
       </div>
+      <button class="app-open" style="color:#1665C0">Open App →</button>
     </div>
-
-    <!-- PackList -->
-    <div class="app-card" onclick="openApp('packlist')">
-      <div class="app-card-hero" style="background:linear-gradient(135deg,#1B5E20,#00695C)">
-        <div class="app-card-top">
-          <div class="app-icon">🎒</div>
-          <div>
-            <div class="app-name">PackList</div>
-            <div class="app-tagline">Smart packing lists</div>
-          </div>
-        </div>
-        <button class="app-open-btn" style="color:#1B5E20">
-          Open App →
-        </button>
-      </div>
-      <div class="app-card-body">
-        <div class="app-features">
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1B5E20"></div>
-            <span>8 built-in templates: Beach, Business, Ski, Camping and more</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1B5E20"></div>
-            <span>Check items off as you pack with live progress bar</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1B5E20"></div>
-            <span>Edit any item inline — customise quantities and names</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#1B5E20"></div>
-            <span>Share your packing list via WhatsApp or send it to travel companions</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Divvy -->
-    <div class="app-card" onclick="openApp('divvy')">
-      <div class="app-card-hero" style="background:linear-gradient(135deg,#AD1457,#6A1B9A)">
-        <div class="app-card-top">
-          <div class="app-icon">💸</div>
-          <div>
-            <div class="app-name">Divvy</div>
-            <div class="app-tagline">Split bills fairly</div>
-          </div>
-        </div>
-        <button class="app-open-btn" style="color:#AD1457">
-          Open App →
-        </button>
-      </div>
-      <div class="app-card-body">
-        <div class="app-features">
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#AD1457"></div>
-            <span>Equal or itemised splits for every expense</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#AD1457"></div>
-            <span>Minimised settlement — fewest transactions to settle up</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#AD1457"></div>
-            <span>Supports SGD, MYR, USD, EUR, JPY, THB and more</span>
-          </div>
-          <div class="app-feature">
-            <div class="app-feature-dot" style="background:#AD1457"></div>
-            <span>Share settlement summary directly via WhatsApp</span>
-          </div>
-        </div>
-      </div>
+    <div class="app-card-body">
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1665C0"></div>Day-by-day itinerary with timeline & calendar views</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1665C0"></div>Attach boarding passes, hotel docs, and PDFs to each item</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1665C0"></div>✨ AI trip generator — describe your trip, get a full itinerary</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1665C0"></div>Pre-departure checklist, map pins, works fully offline</div>
     </div>
   </div>
 
-  <!-- ── FEATURES STRIP ─────────────────────────────────── -->
-  <div class="features-strip">
-    <div class="features-strip-title">Why Travel Toolkit?</div>
-    <div class="feature-row"><span class="feature-row-icon">📵</span><span>Works fully offline — no internet needed after first load</span></div>
-    <div class="feature-row"><span class="feature-row-icon">📱</span><span>Install to home screen on Android & iOS like a native app</span></div>
-    <div class="feature-row"><span class="feature-row-icon">🔒</span><span>All data stays on your phone — no accounts, no sign-up required</span></div>
-    <div class="feature-row"><span class="feature-row-icon">💾</span><span>Share your trips and lists with travel companions in one tap</span></div>
-    <div class="feature-row"><span class="feature-row-icon">🌙</span><span>Dark mode across all three apps</span></div>
-    <div class="feature-row"><span class="feature-row-icon">🚫</span><span>No subscriptions, no ads, no tracking — ever</span></div>
+  <div class="app-card" onclick="openApp('packlist')">
+    <div class="app-card-hero" style="background:linear-gradient(135deg,#1B5E20,#00695C)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="app-icon">🎒</div>
+        <div>
+          <div class="app-name">PackList</div>
+          <div class="app-tagline">Smart packing lists</div>
+        </div>
+      </div>
+      <button class="app-open" style="color:#1B5E20">Open App →</button>
+    </div>
+    <div class="app-card-body">
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1B5E20"></div>8 ready-made templates — Beach, Business, Ski, Camping and more</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1B5E20"></div>Save your own family template and reuse it every trip</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1B5E20"></div>Check off items as you pack, live progress bar</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#1B5E20"></div>Edit item names and quantities, share your list via WhatsApp</div>
+    </div>
   </div>
 
-  <!-- ── KO-FI ──────────────────────────────────────────── -->
-  <div style="margin:0 16px 16px;background:var(--bg-card);
-    border-radius:var(--radius);border:1px solid var(--border);
-    padding:20px;text-align:center;box-shadow:var(--shadow)">
-    <div style="font-size:24px;margin-bottom:8px">☕</div>
+  <div class="app-card" onclick="openApp('divvy')">
+    <div class="app-card-hero" style="background:linear-gradient(135deg,#AD1457,#6A1B9A)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="app-icon">💸</div>
+        <div>
+          <div class="app-name">Divvy</div>
+          <div class="app-tagline">Split bills fairly</div>
+        </div>
+      </div>
+      <button class="app-open" style="color:#AD1457">Open App →</button>
+    </div>
+    <div class="app-card-body">
+      <div class="app-feat"><div class="app-feat-dot" style="background:#AD1457"></div>Equal or itemised splits — you choose how to divide each expense</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#AD1457"></div>Auto-calculates who owes who with fewest payments</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#AD1457"></div>Supports SGD, MYR, USD, EUR, JPY, THB and more</div>
+      <div class="app-feat"><div class="app-feat-dot" style="background:#AD1457"></div>Share settlement summary directly to WhatsApp</div>
+    </div>
+  </div>
+
+  <!-- Why section -->
+  <div class="why-section">
+    <div class="why-title">Why Travel Toolkit?</div>
+    <div class="why-row"><span class="why-icon">📵</span>Works fully offline — no internet needed after first load</div>
+    <div class="why-row"><span class="why-icon">📱</span>Install to your home screen like a native app</div>
+    <div class="why-row"><span class="why-icon">🔒</span>Everything stays on your phone — no accounts, no sign-up</div>
+    <div class="why-row"><span class="why-icon">🌙</span>Dark mode across all three apps</div>
+    <div class="why-row"><span class="why-icon">🚫</span>No subscriptions, no ads, no tracking — ever</div>
+    <div class="why-row"><span class="why-icon">☕</span>Built by one person, with love, for travellers</div>
+  </div>
+
+  <!-- Ko-fi -->
+  <div class="kofi-section">
+    <div style="font-size:22px;margin-bottom:8px">☕</div>
     <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;
-      font-size:16px;color:var(--text);margin-bottom:6px">
-      Enjoy the apps?
+      font-size:16px;color:var(--text);margin-bottom:5px">Enjoying the apps?</div>
+    <div style="font-size:13px;color:var(--text-3);line-height:1.6">
+      If Travel Toolkit made your trips a little easier,<br>a coffee means the world. Thank you 🙏
     </div>
-    <div style="font-size:13px;color:var(--text-3);margin-bottom:16px;line-height:1.6">
-      If Travel Toolkit made your trip a little easier,<br>a coffee means a lot. Thank you! 🙏
-    </div>
-    <a href="https://ko-fi.com/YOUR_KOFI_USERNAME" target="_blank"
-      style="display:inline-flex;align-items:center;gap:8px;
-        background:#FF5E5B;color:#fff;border-radius:var(--radius-sm);
-        padding:12px 24px;font-size:15px;font-weight:700;
-        text-decoration:none;box-shadow:0 4px 12px rgba(255,94,91,0.3);
-        transition:transform .18s" 
-      onmousedown="this.style.transform='scale(0.97)'"
-      onmouseup="this.style.transform='scale(1)'">
+    <a href="https://ko-fi.com/YOUR_KOFI_USERNAME" target="_blank" class="kofi-btn">
       ☕ Buy me a coffee
     </a>
   </div>
 
-  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <!-- Footer -->
   <div class="footer">
-    <div class="footer-text">
-      © 2025 Travel Toolkit · Built with ❤️ for travellers
-    </div>
+    © 2025 Travel Toolkit · Built with ❤️ for travellers<br>
+    <button onclick="replayIntro()" style="color:var(--text-muted);font-size:12px;
+      background:none;border:none;cursor:pointer;margin-top:4px;text-decoration:underline">
+      Replay intro
+    </button>
   </div>
 
-</div>
+</div><!-- /page -->
 
 <script>
 'use strict';
 
-/* ── CONFIG — update these URLs after deploying ─────── */
+/* ── CONFIG ── */
 const APPS = {
-  wayfarer: {
-    url:     'https://leanlifestyle19-cmyk.github.io/TripBinder/',
-    name:    'TripBinder',
-  },
-  packlist: {
-    url:     'https://leanlifestyle19-cmyk.github.io/Packlist/',
-    name:    'PackList',
-  },
-  divvy: {
-    url:     'https://leanlifestyle19-cmyk.github.io/Divvy/',
-    name:    'Divvy',
-  },
+  wayfarer: { url: 'https://leanlifestyle19-cmyk.github.io/TripBinder/' },
+  packlist: { url: 'https://leanlifestyle19-cmyk.github.io/Packlist/' },
+  divvy:    { url: 'https://leanlifestyle19-cmyk.github.io/Divvy/' },
 };
 
-/* ── THEME ──────────────────────────────────────────── */
+/* ── ONBOARDING ── */
+const SLIDES = [
+  {
+    grad:  'linear-gradient(160deg,#0D47A1 0%,#1665C0 50%,#0698A0 100%)',
+    emoji: '🗺️',
+    title: 'Travel Toolkit',
+    sub:   'Three beautifully designed apps that take you from planning your trip to settling the bill.',
+    extra: `<div class="ob-app-row">
+      <div class="ob-app-chip">✈️ TripBinder</div>
+      <div class="ob-app-chip">🎒 PackList</div>
+      <div class="ob-app-chip">💸 Divvy</div>
+    </div>`,
+    btnColor: '#1665C0',
+  },
+  {
+    grad:  'linear-gradient(160deg,#1665C0 0%,#0698A0 100%)',
+    emoji: '✈️',
+    title: 'Plan every detail',
+    sub:   'TripBinder turns your trip into a day-by-day binder. Flights, hotels, restaurants — all in one place, fully offline.',
+    extra: '',
+    btnColor: '#0698A0',
+  },
+  {
+    grad:  'linear-gradient(160deg,#1B5E20 0%,#00695C 100%)',
+    emoji: '🎒',
+    title: 'Pack without stress',
+    sub:   'PackList has 8 ready-made templates for every trip type. Pick one, customise it, and check items off as you pack.',
+    extra: '',
+    btnColor: '#1B5E20',
+  },
+  {
+    grad:  'linear-gradient(160deg,#AD1457 0%,#6A1B9A 100%)',
+    emoji: '💸',
+    title: 'Split bills fairly',
+    sub:   'Divvy tracks group expenses and works out exactly who owes who — then you share the summary straight to WhatsApp.',
+    extra: '',
+    btnColor: '#6A1B9A',
+  },
+];
+
+let obIdx = 0;
+
+function renderSlides() {
+  const wrap    = document.getElementById('ob-slides');
+  const dots    = document.getElementById('ob-dots');
+  const nextBtn = document.getElementById('ob-next');
+  const backBtn = document.getElementById('ob-back');
+  const skipBtn = document.getElementById('ob-skip');
+  const isLast  = obIdx === SLIDES.length - 1;
+
+  wrap.innerHTML = SLIDES.map((s, i) => `
+    <div class="ob-slide" style="background:${s.grad};
+      transform:translateX(${(i - obIdx) * 100}%)">
+      <div class="ob-emoji">${s.emoji}</div>
+      <div class="ob-title">${s.title}</div>
+      <div class="ob-sub">${s.sub}</div>
+      ${s.extra}
+    </div>`).join('');
+
+  dots.innerHTML = SLIDES.map((_, i) =>
+    `<div class="ob-dot ${i===obIdx?'active':''}" onclick="obGo(${i})"></div>`
+  ).join('');
+
+  nextBtn.textContent = isLast ? '🚀 Explore the Apps' : 'Next →';
+  nextBtn.style.color = SLIDES[obIdx].btnColor;
+  backBtn.style.display = obIdx > 0 ? '' : 'none';
+  skipBtn.style.display = isLast ? 'none' : '';
+}
+
+function obNext() {
+  if (obIdx < SLIDES.length - 1) { obIdx++; renderSlides(); }
+  else finishOnboarding();
+}
+function obPrev() { if (obIdx > 0) { obIdx--; renderSlides(); } }
+function obGo(i) { obIdx = i; renderSlides(); }
+
+function finishOnboarding() {
+  localStorage.setItem('tk-onboarded', '1');
+  document.getElementById('onboarding').classList.add('hidden');
+  document.getElementById('main-page').style.display = '';
+  selectNode(0);
+  autoTimer = setInterval(autoRotate, 3000);
+}
+
+function replayIntro() {
+  obIdx = 0;
+  localStorage.removeItem('tk-onboarded');
+  document.getElementById('onboarding').classList.remove('hidden');
+  document.getElementById('main-page').style.display = 'none';
+  renderSlides();
+}
+
+/* ── THEME ── */
 function initTheme() {
-  const saved = localStorage.getItem('toolkit-theme');
+  const saved = localStorage.getItem('tk-theme');
   const dark  = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme:dark)').matches;
   applyTheme(dark);
 }
-
 function applyTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  localStorage.setItem('toolkit-theme', dark ? 'dark' : 'light');
-  document.querySelector('.hero-theme-btn').textContent = dark ? '☀️' : '🌙';
+  localStorage.setItem('tk-theme', dark ? 'dark' : 'light');
+  document.querySelector('.theme-btn').textContent = dark ? '☀️' : '🌙';
 }
-
 function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  applyTheme(!isDark);
+  applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
 }
 
-/* ── APP LINKS ──────────────────────────────────────── */
+/* ── JOURNEY WHEEL ── */
+const NODE_DATA = [
+  { when:'Book your trip',   title:'Plan every detail',
+    desc:'Build a day-by-day itinerary, save flights and hotel docs, attach PDFs.',
+    app:'✈️ TripBinder' },
+  { when:'Before you leave', title:'Pack without forgetting a thing',
+    desc:'Pick a template, customise your list, check items off as you pack.',
+    app:'🎒 PackList' },
+  { when:'On your trip',     title:'Everything offline in your pocket',
+    desc:'No Wi-Fi? No problem. Full itinerary, docs and maps — always available.',
+    app:'✈️ TripBinder' },
+  { when:'Time to settle up',title:'Split bills without the awkwardness',
+    desc:'Log expenses, see who owes who, share the summary straight to WhatsApp.',
+    app:'💸 Divvy' },
+];
+
+let activeNode = 0;
+let autoTimer  = null;
+
+function selectNode(idx) {
+  activeNode = idx;
+  document.querySelectorAll('.jnode').forEach((n,i) =>
+    n.classList.toggle('active', i === idx));
+  const d = NODE_DATA[idx];
+  document.getElementById('jd-when').textContent  = d.when;
+  document.getElementById('jd-title').textContent = d.title;
+  document.getElementById('jd-desc').textContent  = d.desc;
+  document.getElementById('jd-app').textContent   = d.app;
+  // Restart auto-rotate after manual tap
+  clearInterval(autoTimer);
+  autoTimer = setInterval(autoRotate, 3000);
+}
+
+function autoRotate() {
+  selectNode((activeNode + 1) % NODE_DATA.length);
+  clearInterval(autoTimer);
+  autoTimer = setInterval(autoRotate, 3000);
+}
+
+/* ── APP LINKS ── */
 function openApp(key) {
   const app = APPS[key];
   if (app) window.open(app.url, '_blank');
 }
 
-/* ── SERVICE WORKER ─────────────────────────────────── */
+/* ── SERVICE WORKER ── */
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => {});
 }
 
-/* ── INIT ───────────────────────────────────────────── */
+/* ── INIT ── */
 initTheme();
+if (localStorage.getItem('tk-onboarded')) {
+  document.getElementById('onboarding').classList.add('hidden');
+  document.getElementById('main-page').style.display = '';
+  selectNode(0);
+  autoTimer = setInterval(autoRotate, 3000);
+} else {
+  renderSlides();
+}
 </script>
 </body>
 </html>
